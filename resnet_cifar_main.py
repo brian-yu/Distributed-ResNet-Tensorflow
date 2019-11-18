@@ -308,6 +308,7 @@ def train(hps, server = None):
 
   if FLAGS.job_name == None: 
     #serial version
+    start = time.time()
     with tf.train.MonitoredTrainingSession(
         checkpoint_dir=FLAGS.log_root,
         save_checkpoint_secs=60,
@@ -319,6 +320,7 @@ def train(hps, server = None):
         config=create_config_proto()) as mon_sess:
       while not mon_sess.should_stop():
         mon_sess.run(model.train_op)
+    print(f"Training completed in {time.time() - start} seconds.")
 
   else:
     is_chief = (FLAGS.task_index == 0)
