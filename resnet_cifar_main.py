@@ -335,6 +335,7 @@ def train(hps, server = None):
         config=create_config_proto()) as mon_sess:
       while not mon_sess.should_stop():
         mon_sess.run(model.train_op)
+      print("Done")
 
 def main(_):
   if FLAGS.dataset == 'cifar10':
