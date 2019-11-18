@@ -134,7 +134,7 @@ def create_config_proto():
 def record_dataset(filenames):
   """Returns an input pipeline Dataset from `filenames`."""
   record_bytes = _HEIGHT * _WIDTH * _DEPTH + 1
-  return tf.contrib.data.FixedLengthRecordDataset(filenames, record_bytes)
+  return tf.data.FixedLengthRecordDataset(filenames, record_bytes)
 
 
 def get_filenames(is_training, data_dir):
@@ -252,7 +252,7 @@ def train(hps, server = None):
   # old dataset   
   # images, labels = cifar_input.build_input(
   #    FLAGS.dataset, FLAGS.train_data_path, FLAGS.batch_size, FLAGS.mode)
-  images, labels = input_fn(True, FLAGS.train_data_path, FLAGS.batch_size, num_epochs=1000)
+  images, labels = input_fn(True, FLAGS.train_data_path, FLAGS.batch_size, num_epochs=1)
   model = resnet_model.ResNet(hps, images, labels, FLAGS.mode)
   # model = logist_model.LRNet(images, labels, FLAGS.mode)
   model.build_graph()

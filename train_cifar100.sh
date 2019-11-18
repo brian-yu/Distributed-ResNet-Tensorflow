@@ -1,0 +1,1 @@
+python3 resnet_cifar_main.py --train_data_path data/ --dataset cifar100
